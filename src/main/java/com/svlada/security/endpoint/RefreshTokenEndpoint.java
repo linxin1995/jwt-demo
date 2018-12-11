@@ -62,7 +62,7 @@ public class RefreshTokenEndpoint {
     public @ResponseBody JwtToken refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // 从请求头中获取token
         String tokenPayload = tokenExtractor.extract(request.getHeader(WebSecurityConfig.AUTHENTICATION_HEADER_NAME));
-        
+        // 获取头部token的荷载信息
         RawAccessJwtToken rawToken = new RawAccessJwtToken(tokenPayload);
 
         RefreshToken refreshToken = RefreshToken.create(rawToken, jwtSettings.getTokenSigningKey()).orElseThrow(() -> new InvalidJwtToken());
